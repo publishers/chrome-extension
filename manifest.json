@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "video downloader",
+  "version": "0.1",
+  "description": "video downloader",
+  "background": {
+    "persistent": true,
+    "scripts": ["js/background.js"]
+  },
+  "permissions": [
+    "contextMenus",
+    "activeTab", "https://puzzle-movies.com/"
+  ],
+  "icons": {
+    "48": "icons/puzzle-movie.png"
+  }
+}
