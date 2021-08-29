@@ -1,12 +1,13 @@
 {
   "manifest_version": 2,
   "name": "video downloader",
-  "version": "0.1",
+  "version": "0.2",
   "description": "video downloader",
   "background": {
     "persistent": true,
     "scripts": ["js/background.js"]
   },
+  "author": "serhii.malykhin@gmail.com",
   "permissions": [
     "contextMenus",
     "activeTab", "https://puzzle-movies.com/"
