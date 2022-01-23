@@ -62,23 +62,40 @@ function downloadButton(id, url, isEnSubtitle = false, isRuSubtitle = false, jso
     .download {
         margin-left: 10px
     }
+    .download`+id+`> 
+    audio::-webkit-media-controls-timeline,
+    video::-webkit-media-controls-timeline,
+    video::-webkit-media-controls-play-button,
+    video::-webkit-media-controls-volume-slider,
+    video::-webkit-media-controls-current-time-display,
+    video::-webkit-media-controls-time-remaining-display,
+    video::-webkit-media-controls-fullscreen-button,
+    video::-webkit-media-controls-volume-slider,
+    video::-webkit-media-controls-mute-button
+    {
+            display: none;
+    }
     `
     var styleSheet = document.createElement("style")
     styleSheet.type = "text/css"
     styleSheet.innerText = styles
     document.head.appendChild(styleSheet)
 
+    var pageUrl = document.URL;
+    var index = pageUrl.lastIndexOf("#");
+    var subStringIndex = index === -1 ? 32 : index + 1
+
     let subTitleButtons = "";
 
     if (isRuSubtitle) {
         subTitleButtons += `<span class="puzzle_va_middle puzzle_ml_10"><a href="data:text/plain;charset=utf-8,`
             + encodeURIComponent(buildSubTitles("ru", jsonSubtitles))
-            + `" download="` + document.URL.substr(32) + '.Subtitle.ru.vtt' + `">sub-RU</a></span>`
+            + `" download="` + pageUrl.substr(subStringIndex) + '.Subtitle.ru.vtt' + `">sub-RU</a></span>`
     }
     if (isEnSubtitle) {
         subTitleButtons += `<span class="puzzle_va_middle puzzle_ml_10"><a href="data:text/plain;charset=utf-8,`
             + encodeURIComponent(buildSubTitles("en", jsonSubtitles))
-            + `" download="` + document.URL.substr(32) + '.Subtitle.en.vtt' + `">sub-EN</a></span>`
+            + `" download="` + pageUrl.substr(subStringIndex) + '.Subtitle.en.vtt' + `">sub-EN</a></span>`
     }
 
 
@@ -86,8 +103,7 @@ function downloadButton(id, url, isEnSubtitle = false, isRuSubtitle = false, jso
     <div class="download` + id + `">
        <span class="movies-button movies-button_bg-gray movies-button_pt-0_pb_0">
          <span class="movies-button-inset movies-button_h40">
-        
-             <video width="100" height="50" controls="false" loop muted playsinline>
+             <video width="15" height="50" controls="false" muted disablePictureInPicture>
                 <source src="` + url + `" type="video/mp4">
             </video>
              ` + subTitleButtons + `
