@@ -41,21 +41,6 @@ function serialInfoExtractor() {
     }
     return JSON.parse(jsonResult);
 }
-//
-// function episodeExtractor() {
-//     var scripts = document.querySelectorAll("script");
-//     var jsonResult = "{}";
-//     for (let i = 0; i < scripts.length; i++) {
-//         let value = scripts[i];
-//         var episodesIndexStart = value.innerHTML.search("var episodes");
-//         if (episodesIndexStart > -1) {
-//             var subString = value.innerHTML.substr(episodesIndexStart);
-//             jsonResult = subString.replace(new RegExp("(var episodes)(.*?)(\[.*?\])(;)(.*var.*)", 'gs'), "$3");
-//             break;
-//         }
-//     }
-//     return JSON.parse(jsonResult);
-// }
 
 function downloadButton(id, url, isEnSubtitle = false, isRuSubtitle = false, jsonSubtitles) {
     var styles = `
@@ -156,8 +141,9 @@ if (document.URL.startsWith("https://puzzle-movies.com/films")) {
 
     const elements = document.querySelectorAll(".series-light__table-row");
     if (elements != null && elements[episode].querySelector(".downloads" + season + "e" + episode) == null) {
-        fetch("api2/movies/getEpisodeData?movieID=" +
-            serialJsonInfo.movie_id + "&slug=" + serialJsonInfo.slug + "&postID=" + serialJsonInfo.seasons[season].episodes[episode].ID)
+        let url = "https://puzzle-movies.com/api2/movies/getEpisodeData?movieID=" +
+            serialJsonInfo.movie_id + "&slug=" + serialJsonInfo.slug + "&postID=" + serialJsonInfo.seasons[season].episodes[episode].ID;
+        fetch(url)
             .then((response) => {
                 return response.json();
             })
